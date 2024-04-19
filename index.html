@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #000c18;
+            font-family: monospace;
+            color: #083788;
+        }
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes cursor {
+    from, to { border-color: transparent; }
+    50% { border-color: white; }
+}
+
+.welcome {
+
+    text-align: center;
+    height: auto;
+    width: auto;
+    display: inline-block;
+    overflow: auto; /* Ensures the text is not visible until animated */
+}
+
+.welcome p {
+    border-right: 2px solid white; /* Creates the cursor effect */
+    white-space: nowrap; /* Makes the text stay on one line */
+    overflow: hidden; /* Ensures the text is not visible until animated */
+    animation: typing 4s steps(30), cursor 1s steps(1) infinite; /* Add cursor animation */
+}
+        
+        .green {
+            color: green;
+        }
+        .wlc {
+            font-size: 1cm;
+        }
+        .red {
+            color: #ffac30;
+        }
+        .yellow {
+            color: #ebc07f;
+        }
+        .pfp {
+            border-radius: 100000000cm;
+        }
+        .u {
+            font-size: .5cm;
+         
+        }
+        .aboutu {
+            text-align: center;
+            font-size: .5cm;
+        }
+        .infou{
+            color: #083788;
+            font-size: 0.4cm;
+            background-color: #060621;
+            white-space: normal;
+            height: auto;
+            width: 10cm;
+            align-items: left;
+            text-align: left;
+            overflow:auto;
+            border-radius: .5cm;
+
+        }
+        .uend{
+            align-items: right;
+
+        }
+
+        .uend {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .uend h3 {
+            text-align: center;
+            flex: 1;
+            
+        }
+
+        .image0 {
+            text-align: right;
+            flex: 1;
+            border-radius: 100cm;
+        }
+        .uend text{
+        align-items: center;
+        }
+        .text0{
+            text-align: left;
+        }
+ 
+    
+
+
+  
+
+
+    </style>
+</head>
+<body>
+    <center>
+        <div class="welcome">
+ <pre>  <code>        <p class="wlc"><span class="yellow">The text</span> shown below is <span class="green">is about you!</span></p></code></pre> 
+        </div>
+    </center> 
+    <center>
+        
+    </center> 
+    <div class="aboutu">
+        <h1 class="heading">About You</h1>
+        <br>
+       
+    </div>
+  
+ <center>
+            <div class="infou">
+       <p class="inf" id="ip_adrz"></p>
+     <p class="inf" id="deviceType"></p>
+     <p class="inf" id="os"></p>
+     <p class="inf" id="location"></p>
+       <p class="inf" id="lang"></p>
+              <p class="inf" id="conn"></p>
+              <p class="inf" id="browserUsing"></p>
+              <p class="inf" id="">|_FBI wanted list:Yes</p>
+       </div>
+
+  </center> 
+<br>
+
+
+
+</body>
+<script type="text/javascript">
+    document.getElementById("browserUsing").innerHTML = "|_ Your browser:" +  navigator.userAgent;
+    
+    function getIP(json) {
+        document.getElementById("ip_adrz").innerText = " |_ Your public IP address is: " + json.ip;
+    }
+
+
+</script>
+
+<script type="text/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+<script>
+   
+     window.onload = function() {
+            // Get user's device type
+            var deviceType = "Unknown";
+            var userAgent = navigator.userAgent.toLowerCase();
+            
+            if (userAgent.match(/mobile/i) || userAgent.match(/android/i) || userAgent.match(/iphone/i) || userAgent.match(/ipad/i) || userAgent.match(/ipod/i)) {
+                deviceType = "Mobile";
+            } else if (userAgent.match(/tablet/i) || userAgent.match(/ipad/i) || userAgent.match(/android/i)) {
+                deviceType = "Tablet";
+            } else if (userAgent.match(/macintosh|mac os x/i)) {
+                deviceType = "Mac";
+            } else if (userAgent.match(/windows|win32/i)) {
+                deviceType = "Windows PC";
+            } else if (userAgent.match(/linux/i)) {
+                deviceType = "Linux PC";
+            } else if (userAgent.match(/cros/i)) {
+                deviceType = "Chromebook";
+            }
+
+            document.getElementById('deviceType').innerText = "|_ Device you are using now:" + deviceType;
+        };
+
+
+document.getElementById('os').innerText = "|_ Your OS:" + navigator.platform;
+document.getElementById('lang').innerText = "|_ Language you speak:" + navigator.language;
+var pluginsInfo = "";
+        if (navigator.plugins && navigator.plugins.length > 0) {
+            for (var i = 0; i < navigator.plugins.length; i++) {
+                var plugin = navigator.plugins[i];
+                pluginsInfo += '|_ Plugins installed in your browser: ' + plugin.name + ', Filename: ' + plugin.filename + ', Description: ' + plugin.description + '<br>';
+            }
+        } else {
+            pluginsInfo = 'No plugins detected.';
+        }
+
+        // Display the plugins information within the 'conn' element
+        document.getElementById('conn').innerHTML = "" + pluginsInfo;
+
+
+       
+</script>
+<script>
+  // Get user's geolocation
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+    position => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        document.getElementById('location').innerText = "|_ Your Latitude: " + latitude + ", Longitude: " + longitude;
+    },
+    error => {
+        console.error('Error getting location:', error);
+        document.getElementById('location').innerText += '|_ looks like you denied my request, you broke my heart';
+    },
+    { maximumAge: 0 } // Set maximumAge to 0 to prevent using cached location
+);
+        } else {
+            document.getElementById('location').innerText += ' |_ looks like you denied my request, you broke my heart' ;
+        }
+</script>
+</body>
+</html>
